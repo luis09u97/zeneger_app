@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#1A1F36</color>
+
+    <!-- Primárias -->
+    <color name="primary">#5B5FEF</color>
+    <color name="primary_dark">#3D40C4</color>
+    <color name="primary_light">#8B8FF8</color>
+    <color name="primary_surface">#EEEFFE</color>
+
+    <!-- Aliases para compatibilidade com código antigo -->
+    <color name="accent">#5B5FEF</color>
+    <color name="accent_dark">#3D40C4</color>
+    <color name="accent_light">#8B8FF8</color>
+    <color name="bg_dark">#F4F6FB</color>
+
+    <!-- Backgrounds -->
+    <color name="bg_app">#F4F6FB</color>
+    <color name="bg_surface">#FFFFFF</color>
+    <color name="bg_toolbar">#1A1F36</color>
+    <color name="bg_chat">#E8ECF4</color>
+    <color name="bg_input">#EEF0F8</color>
+    <color name="bg_card">#FFFFFF</color>
+
+    <!-- Textos -->
+    <color name="text_primary">#1A1F36</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_hint">#9CA3AF</color>
+    <color name="text_white">#FFFFFF</color>
+
+    <!-- Bolhas de mensagem -->
+    <color name="bubble_sent">#5B5FEF</color>
+    <color name="bubble_sent_text">#FFFFFF</color>
+    <color name="bubble_received">#FFFFFF</color>
+    <color name="bubble_received_text">#1A1F36</color>
+
+    <!-- Status -->
+    <color name="online">#22C55E</color>
+    <color name="offline">#9CA3AF</color>
+    <color name="unread_badge">#EF4444</color>
+
+    <!-- Ações -->
+    <color name="accent_green">#22C55E</color>
+    <color name="accent_red">#EF4444</color>
+    <color name="accent_orange">#F97316</color>
+    <color name="accent_purple">#A855F7</color>
+    <color name="accent_teal">#14B8A6</color>
+    <color name="accent_blue">#3B82F6</color>
+
+    <!-- Divisor -->
+    <color name="divider">#E5E7EB</color>
+    <color name="divider_dark">#D1D5DB</color>
+
+    <!-- Ícones de configurações -->
+    <color name="icon_bg_blue">#EFF6FF</color>
+    <color name="icon_bg_green">#F0FDF4</color>
+    <color name="icon_bg_orange">#FFF7ED</color>
+    <color name="icon_bg_purple">#FAF5FF</color>
+    <color name="icon_bg_red">#FEF2F2</color>
+    <color name="icon_bg_teal">#F0FDFA</color>
+
+    <!-- Sombras e overlays -->
+    <color name="overlay">#80000000</color>
+    <color name="shadow">#1A000000</color>
+
+    <!-- Modo escuro -->
+    <color name="dark_bg">#0F1117</color>
+    <color name="dark_surface">#1A1F36</color>
+    <color name="dark_card">#252A45</color>
+
+    <!-- Toolbar -->
+    <color name="toolbar_dark">#1A1F36</color>
+
+    <!-- Online dot -->
+    <color name="online_green">#22C55E</color>
+
+    <!-- Red -->
+    <color name="red">#EF4444</color>
+
+    <!-- White -->
+    <color name="white">#FFFFFF</color>
+
+    <!-- Settings -->
+    <color name="settings_icon_bg">#EFF6FF</color>
+    <color name="settings_icon_green">#F0FDF4</color>
+    <color name="settings_icon_orange">#FFF7ED</color>
+    <color name="settings_icon_purple">#FAF5FF</color>
+    <color name="settings_icon_red">#FEF2F2</color>
+    <color name="settings_icon_teal">#F0FDFA</color>
+</resources>

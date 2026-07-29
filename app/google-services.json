@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "946287043754",
+    "firebase_url": "https://zeneger-1db7f-default-rtdb.firebaseio.com",
+    "project_id": "zeneger-1db7f",
+    "storage_bucket": "zeneger-1db7f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946287043754:android:0ed925268714a6742edcd3",
+        "android_client_info": {
+          "package_name": "com.seunome.zeneger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiopGiT56hI8zxV4KRFSIeb27HR4ek6m4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
