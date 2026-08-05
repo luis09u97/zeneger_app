@@ -25,6 +25,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group);
+        PremiumUi.apply(this);
 
         mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();

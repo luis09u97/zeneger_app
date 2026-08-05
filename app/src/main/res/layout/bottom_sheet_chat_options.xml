@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -46,8 +47,8 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:src="@android:drawable/ic_search_category_default"
-                android:tint="@color/accent_blue"/>
+                app:srcCompat="@drawable/ic_zen_search"
+                app:tint="@color/accent_blue"/>
         </FrameLayout>
 
         <TextView
@@ -55,7 +56,7 @@
             android:layout_height="wrap_content"
             android:text="Pesquisar mensagens"
             android:textColor="@color/text_primary"
-            android:textSize="15sp"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
@@ -79,8 +80,8 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:src="@android:drawable/ic_menu_delete"
-                android:tint="@color/accent_orange"/>
+                app:srcCompat="@drawable/ic_zen_delete"
+                app:tint="@color/accent_orange"/>
         </FrameLayout>
 
         <TextView
@@ -88,7 +89,7 @@
             android:layout_height="wrap_content"
             android:text="Limpar conversa"
             android:textColor="@color/text_primary"
-            android:textSize="15sp"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
@@ -113,8 +114,8 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:src="@android:drawable/ic_delete"
-                android:tint="@color/accent_red"/>
+                app:srcCompat="@drawable/ic_zen_delete"
+                app:tint="@color/accent_red"/>
         </FrameLayout>
 
         <TextView
@@ -123,7 +124,7 @@
             android:layout_height="wrap_content"
             android:text="Bloquear"
             android:textColor="@color/accent_red"
-            android:textSize="15sp"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
@@ -156,8 +157,8 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:src="@android:drawable/ic_menu_close_clear_cancel"
-                android:tint="@color/text_secondary"/>
+                app:srcCompat="@drawable/ic_zen_close"
+                app:tint="@color/text_secondary"/>
         </FrameLayout>
 
         <TextView
@@ -165,7 +166,7 @@
             android:layout_height="wrap_content"
             android:text="Cancelar"
             android:textColor="@color/text_secondary"
-            android:textSize="15sp"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 

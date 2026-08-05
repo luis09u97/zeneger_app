@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,8 +9,8 @@
     <!-- Toolbar -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:background="@color/bg_toolbar"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@drawable/bg_toolbar_glass"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingStart="4dp"
@@ -18,39 +19,39 @@
 
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/ic_media_previous"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="#FFFFFF"
+            android:layout_width="@dimen/action_touch_size"
+            android:layout_height="@dimen/action_touch_size"
+            app:srcCompat="@drawable/ic_zen_back"
+            android:background="@drawable/bg_icon_button"
+            app:tint="@color/icon_toolbar"
             android:padding="12dp"/>
 
         <FrameLayout
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="@dimen/compact_touch_size"
+            android:layout_height="@dimen/compact_touch_size"
             android:layout_marginEnd="12dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/toolbarAvatar"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="@dimen/compact_touch_size"
+                android:layout_height="@dimen/compact_touch_size"
                 android:src="@drawable/bg_avatar"
                 android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/toolbarAvatarLetter"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="@dimen/compact_touch_size"
+                android:layout_height="@dimen/compact_touch_size"
                 android:gravity="center"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="@drawable/bg_avatar"/>
 
             <View
                 android:id="@+id/toolbarOnlineDot"
-                android:layout_width="13dp"
-                android:layout_height="13dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_gravity="bottom|end"
                 android:background="@drawable/bg_online_dot"
                 android:visibility="gone"/>
@@ -80,37 +81,37 @@
                 android:layout_height="wrap_content"
                 android:text="online"
                 android:textColor="#99FFFFFF"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/videoCallBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/ic_menu_camera"
-            android:tint="#FFFFFF"
+            android:layout_width="@dimen/action_touch_size"
+            android:layout_height="@dimen/action_touch_size"
+            app:srcCompat="@drawable/ic_zen_video"
+            app:tint="@color/icon_toolbar"
             android:padding="12dp"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+            android:background="@drawable/bg_icon_button"/>
 
         <ImageView
             android:id="@+id/callBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/ic_menu_call"
-            android:tint="#FFFFFF"
+            android:layout_width="@dimen/action_touch_size"
+            android:layout_height="@dimen/action_touch_size"
+            app:srcCompat="@drawable/ic_zen_call"
+            app:tint="@color/icon_toolbar"
             android:padding="12dp"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+            android:background="@drawable/bg_icon_button"/>
 
-        <TextView
+        <ImageView
             android:id="@+id/optionsBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:text="⋮"
-            android:textSize="22sp"
-            android:textColor="#FFFFFF"
-            android:gravity="center"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+            android:layout_width="@dimen/action_touch_size"
+            android:layout_height="@dimen/action_touch_size"
+            app:srcCompat="@drawable/ic_zen_more"
+            app:tint="@color/icon_toolbar"
+            android:padding="12dp"
+            android:contentDescription="Mais opções"
+            android:background="@drawable/bg_icon_button"/>
 
     </LinearLayout>
 
@@ -139,7 +140,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/primary"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:maxLines="1"
             android:ellipsize="end"/>
 
@@ -164,7 +165,7 @@
         android:layout_height="wrap_content"
         android:text="digitando..."
         android:textColor="@color/text_secondary"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:fontFamily="sans-serif-light"
         android:paddingStart="18dp"
         android:paddingBottom="4dp"
@@ -195,18 +196,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/text_secondary"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:maxLines="2"
             android:ellipsize="end"/>
 
         <ImageView
             android:id="@+id/cancelReplyBtn"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:tint="@color/text_secondary"
+            android:layout_width="@dimen/inline_action_size"
+            android:layout_height="@dimen/inline_action_size"
+            app:srcCompat="@drawable/ic_zen_close"
+            app:tint="@color/text_secondary"
             android:padding="6dp"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+            android:background="@drawable/bg_icon_button"/>
 
     </LinearLayout>
 
@@ -220,20 +221,25 @@
         android:paddingEnd="8dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:background="@color/bg_surface">
+        android:background="@drawable/bg_card_rounded"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="10dp">
 
         <ImageView
             android:id="@+id/attachBtn"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:src="@android:drawable/ic_menu_share"
-            android:tint="@color/text_secondary"
+            android:layout_width="@dimen/compact_touch_size"
+            android:layout_height="@dimen/compact_touch_size"
+            app:srcCompat="@drawable/ic_zen_attach"
+            app:tint="@color/text_secondary"
             android:padding="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+            android:background="@drawable/bg_icon_button"/>
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="52dp"
+            android:layout_height="@dimen/composer_height"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:background="@drawable/bg_input"
@@ -252,33 +258,33 @@
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_hint"
                 android:background="@null"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:inputType="textCapSentences|textMultiLine"
                 android:maxLines="5"/>
 
             <ImageView
                 android:id="@+id/emojiBtn"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:src="@android:drawable/btn_star_big_off"
-                android:tint="@color/text_hint"
+                android:layout_width="@dimen/inline_action_size"
+                android:layout_height="@dimen/inline_action_size"
+                app:srcCompat="@drawable/ic_zen_smile"
+                app:tint="@color/text_hint"
                 android:padding="4dp"
-                android:background="?attr/selectableItemBackgroundBorderless"/>
+                android:background="@drawable/bg_icon_button"/>
 
         </LinearLayout>
 
         <FrameLayout
             android:id="@+id/sendButton"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="@dimen/composer_height"
+            android:layout_height="@dimen/composer_height"
             android:background="@drawable/bg_send_button">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/action_icon_size"
+                android:layout_height="@dimen/action_icon_size"
                 android:layout_gravity="center"
-                android:src="@android:drawable/ic_menu_send"
-                android:tint="#FFFFFF"/>
+                app:srcCompat="@drawable/ic_zen_send"
+                app:tint="@color/icon_on_accent"/>
 
         </FrameLayout>
 

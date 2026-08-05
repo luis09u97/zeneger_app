@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.*;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.*;
 import com.bumptech.glide.Glide;
@@ -38,6 +37,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        PremiumUi.apply(this);
 
         mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -51,7 +51,7 @@ public class ChatActivity extends AppCompatActivity {
         TextView toolbarAvatar = findViewById(R.id.toolbarAvatarLetter);
         TextView toolbarStatus = findViewById(R.id.toolbarStatus);
         View toolbarOnlineDot  = findViewById(R.id.toolbarOnlineDot);
-        TextView optionsBtn    = findViewById(R.id.optionsBtn);
+        View optionsBtn        = findViewById(R.id.optionsBtn);
 
         if (isGroup) {
             chatId       = getIntent().getStringExtra("groupId");
@@ -249,6 +249,7 @@ public class ChatActivity extends AppCompatActivity {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             View view = LayoutInflater.from(this)
                     .inflate(R.layout.bottom_sheet_chat_options, null);
+            PremiumUi.styleDynamic(view);
             dialog.setContentView(view);
 
             if (dialog.getWindow() != null) {
@@ -292,35 +293,37 @@ public class ChatActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             String[] options = isGroup
-                    ? new String[]{"Buscar mensagens", "Limpar conversa", "Cancelar"}
+                    ? new String[]{"Buscar mensagens", "Limpar conversa"}
                     : new String[]{"Buscar mensagens", "Limpar conversa",
-                    "Bloquear " + receiverName, "Cancelar"};
+                    "Bloquear " + receiverName};
 
-            new AlertDialog.Builder(this)
-                    .setItems(options, (d, which) -> {
+            ZenegerDialog.on(this)
+                    .icon(R.drawable.ic_zen_more)
+                    .title("Opções da conversa")
+                    .items(options, (index, label) -> {
                         if (isGroup) {
-                            if (which == 0) showSearchDialog();
-                            else if (which == 1) clearChat();
+                            if (index == 0) showSearchDialog();
+                            else if (index == 1) clearChat();
                         } else {
-                            if (which == 0) showSearchDialog();
-                            else if (which == 1) clearChat();
-                            else if (which == 2) blockUser();
+                            if (index == 0) showSearchDialog();
+                            else if (index == 1) clearChat();
+                            else if (index == 2) blockUser();
                         }
-                    }).show();
+                    })
+                    .show();
         }
     }
 
     private void showSearchDialog() {
-        EditText searchInput = new EditText(this);
-        searchInput.setHint("Buscar mensagem...");
-        searchInput.setPadding(40, 20, 40, 20);
-
-        new AlertDialog.Builder(this)
-                .setTitle("Buscar mensagens")
-                .setView(searchInput)
-                .setPositiveButton("Buscar", (d, w) ->
-                        searchMessages(searchInput.getText().toString().trim()))
-                .setNegativeButton("Limpar", (d, w) -> searchMessages(""))
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_search)
+                .title("Buscar mensagens")
+                .input("Buscar mensagem...")
+                .confirmInput("Buscar", (d, query) -> {
+                    searchMessages(query);
+                    d.dismiss();
+                })
+                .cancel("Limpar", d -> searchMessages(""))
                 .show();
     }
 
@@ -341,10 +344,11 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void clearChat() {
-        new AlertDialog.Builder(this)
-                .setTitle("Limpar conversa")
-                .setMessage("Apagar todas as mensagens para você?")
-                .setPositiveButton("Limpar", (d, w) -> {
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_delete)
+                .title("Limpar conversa")
+                .message("Apagar todas as mensagens para você?")
+                .confirm("Limpar", d -> {
                     if (chatId == null) return;
                     mDatabase.child(getChatPath()).child(chatId)
                             .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -355,26 +359,28 @@ public class ChatActivity extends AppCompatActivity {
                                     }
                                     Toast.makeText(ChatActivity.this,
                                             "Conversa limpa!", Toast.LENGTH_SHORT).show();
+                                    d.dismiss();
                                 }
                                 @Override public void onCancelled(DatabaseError e) {}
                             });
                 })
-                .setNegativeButton("Cancelar", null)
+                .cancel("Cancelar")
                 .show();
     }
 
     private void blockUser() {
         if (receiverId == null) return;
-        new AlertDialog.Builder(this)
-                .setTitle("Bloquear " + receiverName + "?")
-                .setMessage("Você não receberá mais mensagens desta pessoa.")
-                .setPositiveButton("Bloquear", (d, w) -> {
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_block)
+                .title("Bloquear " + receiverName + "?")
+                .message("Você não receberá mais mensagens desta pessoa.")
+                .confirm("Bloquear", d -> {
                     mDatabase.child("blocked").child(myUid).child(receiverId).setValue(true);
                     mDatabase.child("contacts").child(myUid).child(receiverId).removeValue();
                     Toast.makeText(this, receiverName + " bloqueado.", Toast.LENGTH_SHORT).show();
                     finish();
                 })
-                .setNegativeButton("Cancelar", null)
+                .cancel("Cancelar")
                 .show();
     }
 
@@ -385,25 +391,28 @@ public class ChatActivity extends AppCompatActivity {
 
         String[] options = isMine
                 ? new String[]{"↩️ Responder", "😀 Reagir", "📌 Fixar",
-                "🗑 Apagar para mim", "🗑 Apagar para todos", "Cancelar"}
+                "🗑 Apagar para mim", "🗑 Apagar para todos"}
                 : new String[]{"↩️ Responder", "😀 Reagir", "📌 Fixar",
-                "🗑 Apagar para mim", "Cancelar"};
+                "🗑 Apagar para mim"};
 
-        new AlertDialog.Builder(this)
-                .setItems(options, (dialog, which) -> {
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_more)
+                .title("Mensagem")
+                .items(options, (index, label) -> {
                     if (isMine) {
-                        if (which == 0) setReply(msg.text);
-                        else if (which == 1) showReactionPicker(messageKey);
-                        else if (which == 2) pinMessage(msg.text);
-                        else if (which == 3) deleteForMe(messageKey);
-                        else if (which == 4) deleteForAll(messageKey);
+                        if (index == 0) setReply(msg.text);
+                        else if (index == 1) showReactionPicker(messageKey);
+                        else if (index == 2) pinMessage(msg.text);
+                        else if (index == 3) deleteForMe(messageKey);
+                        else if (index == 4) deleteForAll(messageKey);
                     } else {
-                        if (which == 0) setReply(msg.text);
-                        else if (which == 1) showReactionPicker(messageKey);
-                        else if (which == 2) pinMessage(msg.text);
-                        else if (which == 3) deleteForMe(messageKey);
+                        if (index == 0) setReply(msg.text);
+                        else if (index == 1) showReactionPicker(messageKey);
+                        else if (index == 2) pinMessage(msg.text);
+                        else if (index == 3) deleteForMe(messageKey);
                     }
-                }).show();
+                })
+                .show();
     }
 
     private void setReply(String text) {
@@ -420,13 +429,14 @@ public class ChatActivity extends AppCompatActivity {
 
     private void showReactionPicker(String messageKey) {
         String[] emojis = {"❤️", "😂", "👍", "😮", "😢", "🔥"};
-        new AlertDialog.Builder(this)
-                .setTitle("Reagir")
-                .setItems(emojis, (d, which) -> {
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_smile)
+                .title("Reagir")
+                .items(emojis, (index, emoji) -> {
                     if (chatId == null) return;
                     mDatabase.child(getChatPath()).child(chatId)
                             .child(messageKey).child("reactions")
-                            .child(myUid).setValue(emojis[which]);
+                            .child(myUid).setValue(emoji);
                     Toast.makeText(this, "Reação adicionada!", Toast.LENGTH_SHORT).show();
                 })
                 .show();

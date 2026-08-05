@@ -12,6 +12,7 @@ import com.google.firebase.database.*;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText nameEditText, emailEditText, passwordEditText;
+    ImageButton passwordToggle;
     Button registerButton;
     TextView loginLink;
     FirebaseAuth mAuth;
@@ -21,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        PremiumUi.apply(this);
 
         mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -28,8 +30,11 @@ public class RegisterActivity extends AppCompatActivity {
         nameEditText     = findViewById(R.id.nameEditText);
         emailEditText    = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+        passwordToggle   = findViewById(R.id.passwordToggle);
         registerButton   = findViewById(R.id.registerButton);
         loginLink        = findViewById(R.id.loginLink);
+
+        PremiumUi.bindPasswordToggle(passwordEditText, passwordToggle);
 
         View content = findViewById(android.R.id.content);
         content.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));

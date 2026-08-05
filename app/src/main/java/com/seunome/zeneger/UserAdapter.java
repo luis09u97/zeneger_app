@@ -34,6 +34,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_user, parent, false);
+        PremiumUi.styleDynamic(view);
         return new ViewHolder(view);
     }
 
@@ -167,7 +168,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, avatarLetter, status, groupBadge, favoriteBadge, unreadDot, timeText;
+        TextView name, avatarLetter, status, unreadDot, timeText;
+        View groupBadge, favoriteBadge;
         CircleImageView avatar;
         View onlineDot;
 

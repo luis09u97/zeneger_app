@@ -1,8 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/toolbar_dark"
     android:fillViewport="true">
 
     <LinearLayout
@@ -10,35 +13,22 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
+        android:paddingStart="@dimen/auth_horizontal_padding"
+        android:paddingEnd="@dimen/auth_horizontal_padding"
         android:paddingTop="60dp"
         android:paddingBottom="40dp">
 
-        <!-- Logo -->
-        <FrameLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/bg_send_button"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Z"
-                android:textColor="#FFFFFF"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                android:gravity="center"/>
-
-        </FrameLayout>
+        <com.seunome.zeneger.AuthBrandAvatar
+            android:layout_width="@dimen/brand_mark_size"
+            android:layout_height="@dimen/brand_mark_size"
+            android:layout_marginBottom="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Zeneger"
-            android:textSize="36sp"
-            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:textColor="@color/text_primary"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
@@ -46,8 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Conecte-se com quem importa"
-            android:textSize="15sp"
-            android:textColor="#99FFFFFF"
+            android:textSize="16sp"
+            android:textColor="@color/text_secondary"
             android:layout_marginBottom="52dp"/>
 
         <!-- Card de login -->
@@ -56,64 +46,107 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/bg_card_rounded"
-            android:padding="24dp">
+            android:padding="28dp"
+            android:elevation="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Entrar na conta"
                 android:textColor="@color/text_primary"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="20dp"/>
 
-            <EditText
-                android:id="@+id/emailEditText"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:hint="E-mail"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_hint"
-                android:background="@drawable/bg_input"
-                android:inputType="textEmailAddress"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:textSize="15sp"
-                android:layout_marginBottom="14dp"/>
+                android:layout_height="@dimen/field_height"
+                android:layout_marginBottom="14dp">
 
-            <EditText
-                android:id="@+id/passwordEditText"
+                <EditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="E-mail"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_hint"
+                    android:background="@drawable/bg_input"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="50dp"
+                    android:paddingEnd="18dp"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@null"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_zen_email" />
+
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:hint="Senha"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_hint"
-                android:background="@drawable/bg_input"
-                android:inputType="textPassword"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:textSize="15sp"
-                android:layout_marginBottom="24dp"/>
+                android:layout_height="@dimen/field_height"
+                android:layout_marginBottom="24dp">
+
+                <EditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Senha"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_hint"
+                    android:background="@drawable/bg_input"
+                    android:inputType="textPassword"
+                    android:paddingStart="50dp"
+                    android:paddingEnd="52dp"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@null"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_zen_lock" />
+
+                <ImageButton
+                    android:id="@+id/passwordToggle"
+                    android:layout_width="@dimen/inline_action_size"
+                    android:layout_height="@dimen/inline_action_size"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="6dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Mostrar senha"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_zen_visibility_off" />
+
+            </FrameLayout>
 
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="@dimen/field_height"
                 android:text="ENTRAR"
                 android:background="@drawable/bg_button"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:stateListAnimator="@null"
                 android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:id="@+id/registerLink"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/action_touch_size"
                 android:text="Não tem conta? Cadastre-se"
                 android:textColor="@color/accent"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -121,3 +154,5 @@
     </LinearLayout>
 
 </ScrollView>
+
+</FrameLayout>

@@ -23,6 +23,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_search_user, parent, false);
+        PremiumUi.styleDynamic(view);
         return new ViewHolder(view);
     }
 

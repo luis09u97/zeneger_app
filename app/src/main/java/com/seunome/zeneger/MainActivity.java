@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     EditText emailEditText, passwordEditText;
+    ImageButton passwordToggle;
     Button loginButton;
     TextView registerLink;
     FirebaseAuth mAuth;
@@ -20,13 +21,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PremiumUi.apply(this);
 
         mAuth = FirebaseAuth.getInstance();
 
         emailEditText    = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+        passwordToggle   = findViewById(R.id.passwordToggle);
         loginButton      = findViewById(R.id.loginButton);
         registerLink     = findViewById(R.id.registerLink);
+
+        PremiumUi.bindPasswordToggle(passwordEditText, passwordToggle);
 
         // Animação de entrada
         View content = findViewById(android.R.id.content);

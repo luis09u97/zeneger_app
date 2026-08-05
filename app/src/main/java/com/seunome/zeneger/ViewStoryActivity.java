@@ -21,6 +21,7 @@ public class ViewStoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_story);
+        PremiumUi.apply(this);
 
         storyImageView  = findViewById(R.id.storyImageView);
         storyProgress   = findViewById(R.id.storyProgress);

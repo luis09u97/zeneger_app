@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -7,8 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="@color/bg_toolbar"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@drawable/bg_toolbar_glass"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingStart="4dp"
@@ -17,19 +18,19 @@
 
         <ImageView
             android:id="@+id/backBtn"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:src="@android:drawable/ic_media_previous"
-            android:tint="#FFFFFF"
+            android:layout_width="@dimen/action_touch_size"
+            android:layout_height="@dimen/action_touch_size"
+            app:srcCompat="@drawable/ic_zen_back"
+            app:tint="@color/icon_toolbar"
             android:padding="12dp"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+            android:background="@drawable/bg_icon_button"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Adicionar Contato"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"/>
 
@@ -39,18 +40,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_surface"
+        android:background="@drawable/bg_card_rounded"
         android:paddingStart="14dp"
         android:paddingEnd="14dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:elevation="2dp">
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="8dp">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/field_height"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:background="@drawable/bg_search"
@@ -60,10 +65,10 @@
             android:layout_marginEnd="10dp">
 
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@android:drawable/ic_search_category_default"
-                android:tint="@color/text_hint"
+                android:layout_width="@dimen/settings_icon_size"
+                android:layout_height="@dimen/settings_icon_size"
+                app:srcCompat="@drawable/ic_zen_search"
+                app:tint="@color/text_hint"
                 android:layout_marginEnd="10dp"/>
 
             <EditText
@@ -73,7 +78,7 @@
                 android:hint="Buscar por nome ou email"
                 android:textColorHint="@color/text_hint"
                 android:textColor="@color/text_primary"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:background="@null"
                 android:inputType="text"
                 android:singleLine="true"
@@ -84,10 +89,10 @@
         <TextView
             android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/field_height"
             android:text="Buscar"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:gravity="center"
             android:background="@drawable/bg_button"
@@ -105,7 +110,11 @@
         android:id="@+id/searchResultsRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_surface"
+        android:background="@android:color/transparent"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="5dp"
         android:paddingTop="8dp"
         android:clipToPadding="false"/>
 

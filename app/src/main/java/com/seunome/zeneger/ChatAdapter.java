@@ -44,6 +44,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ? R.layout.item_message_sent
                 : R.layout.item_message_received;
         View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
+        PremiumUi.styleDynamic(v);
         return new MsgHolder(v);
     }
 

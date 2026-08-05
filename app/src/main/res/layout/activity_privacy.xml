@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -7,8 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="@color/bg_toolbar"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@drawable/bg_toolbar_glass"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingStart="4dp"
@@ -17,19 +18,19 @@
 
         <ImageView
             android:id="@+id/backBtn"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:src="@android:drawable/ic_media_previous"
-            android:tint="#FFFFFF"
+            android:layout_width="@dimen/action_touch_size"
+            android:layout_height="@dimen/action_touch_size"
+            app:srcCompat="@drawable/ic_zen_back"
+            app:tint="@color/icon_toolbar"
             android:padding="12dp"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+            android:background="@drawable/bg_icon_button"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Privacidade"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"/>
 
@@ -44,6 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:paddingBottom="32dp">
 
             <TextView
@@ -51,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:text="VISIBILIDADE"
                 android:textColor="@color/primary"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.1"
                 android:paddingStart="16dp"
@@ -62,39 +65,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/bg_surface">
+                android:background="@drawable/bg_card_rounded">
 
                 <LinearLayout
                     android:id="@+id/lastSeenPrivacyOption"
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
+                    android:layout_height="@dimen/settings_item_height"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:background="?attr/selectableItemBackground">
-                    <FrameLayout android:layout_width="40dp" android:layout_height="40dp"
+                    <FrameLayout android:layout_width="@dimen/settings_icon_box" android:layout_height="@dimen/settings_icon_box"
                         android:background="@drawable/bg_settings_icon_blue" android:layout_marginEnd="16dp">
-                        <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        <ImageView android:layout_width="@dimen/settings_icon_size" android:layout_height="@dimen/settings_icon_size"
                             android:layout_gravity="center"
-                            android:src="@android:drawable/ic_menu_recent_history"
-                            android:tint="@color/accent_blue"/>
+                            app:srcCompat="@drawable/ic_zen_visibility"
+                            app:tint="@color/accent_blue"/>
                     </FrameLayout>
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="Última visualização" android:textColor="@color/text_primary" android:textSize="15sp"/>
+                            android:text="Última visualização" android:textColor="@color/text_primary" android:textSize="16sp"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                             android:text="Quem pode ver quando você esteve online"
-                            android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                            android:textColor="@color/text_secondary" android:textSize="13sp"/>
                     </LinearLayout>
                     <TextView android:id="@+id/lastSeenPrivacyValue"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="Todos" android:textColor="@color/text_secondary"
-                        android:textSize="13sp" android:layout_marginEnd="8dp"/>
+                        android:textSize="14sp" android:layout_marginEnd="8dp"/>
                     <ImageView android:layout_width="16dp" android:layout_height="16dp"
-                        android:src="@android:drawable/arrow_up_float"
-                        android:tint="@color/text_hint" android:rotation="90"/>
+                        app:srcCompat="@drawable/ic_zen_chevron_right"
+                        app:tint="@color/text_hint" />
                 </LinearLayout>
 
                 <View android:layout_width="match_parent" android:layout_height="1dp"
@@ -103,33 +106,33 @@
                 <LinearLayout
                     android:id="@+id/profilePhotoPrivacyOption"
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
+                    android:layout_height="@dimen/settings_item_height"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:background="?attr/selectableItemBackground">
-                    <FrameLayout android:layout_width="40dp" android:layout_height="40dp"
+                    <FrameLayout android:layout_width="@dimen/settings_icon_box" android:layout_height="@dimen/settings_icon_box"
                         android:background="@drawable/bg_settings_icon_teal" android:layout_marginEnd="16dp">
-                        <ImageView android:layout_width="20dp" android:layout_height="20dp"
-                            android:layout_gravity="center" android:src="@android:drawable/ic_menu_camera"
-                            android:tint="@color/accent_teal"/>
+                        <ImageView android:layout_width="@dimen/settings_icon_size" android:layout_height="@dimen/settings_icon_size"
+                            android:layout_gravity="center" app:srcCompat="@drawable/ic_zen_camera"
+                            app:tint="@color/accent_teal"/>
                     </FrameLayout>
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="Foto de perfil" android:textColor="@color/text_primary" android:textSize="15sp"/>
+                            android:text="Foto de perfil" android:textColor="@color/text_primary" android:textSize="16sp"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                             android:text="Quem pode ver sua foto"
-                            android:textColor="@color/text_secondary" android:textSize="12sp"/>
+                            android:textColor="@color/text_secondary" android:textSize="13sp"/>
                     </LinearLayout>
                     <TextView android:id="@+id/profilePhotoValue"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="Todos" android:textColor="@color/text_secondary"
-                        android:textSize="13sp" android:layout_marginEnd="8dp"/>
+                        android:textSize="14sp" android:layout_marginEnd="8dp"/>
                     <ImageView android:layout_width="16dp" android:layout_height="16dp"
-                        android:src="@android:drawable/arrow_up_float"
-                        android:tint="@color/text_hint" android:rotation="90"/>
+                        app:srcCompat="@drawable/ic_zen_chevron_right"
+                        app:tint="@color/text_hint" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -139,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:text="CONTATOS BLOQUEADOS"
                 android:textColor="@color/primary"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.1"
                 android:paddingStart="16dp"
@@ -150,7 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/bg_surface">
+                android:background="@drawable/bg_card_rounded">
 
                 <TextView
                     android:id="@+id/emptyBlockedText"
@@ -158,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:text="Nenhum contato bloqueado"
                     android:textColor="@color/text_secondary"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     android:gravity="center"
                     android:padding="28dp"
                     android:visibility="visible"/>

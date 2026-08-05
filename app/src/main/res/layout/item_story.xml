@@ -1,40 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="78dp"
+    android:layout_height="@dimen/story_item_height"
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
-    android:background="?attr/selectableItemBackground">
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:elevation="@dimen/premium_card_elevation"
+    android:background="@drawable/bg_list_item_glass">
 
     <FrameLayout
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/story_avatar_size"
+        android:layout_height="@dimen/story_avatar_size"
         android:layout_marginEnd="16dp">
 
         <View
             android:id="@+id/storyRing"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/story_avatar_size"
+            android:layout_height="@dimen/story_avatar_size"
             android:background="@drawable/bg_story_ring"
             android:padding="2dp"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/storyAvatar"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
+            android:layout_width="@dimen/story_avatar_inner_size"
+            android:layout_height="@dimen/story_avatar_inner_size"
             android:layout_gravity="center"
             android:src="@drawable/bg_avatar"/>
 
         <TextView
             android:id="@+id/storyAvatarLetter"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
+            android:layout_width="@dimen/story_avatar_inner_size"
+            android:layout_height="@dimen/story_avatar_inner_size"
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#FFFFFF"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textStyle="bold"/>
 
     </FrameLayout>
@@ -49,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_primary"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"/>
 
@@ -58,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_secondary"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:layout_marginTop="2dp"/>
 
     </LinearLayout>

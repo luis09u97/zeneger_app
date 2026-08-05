@@ -20,7 +20,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
 
     CircleImageView profileImage;
-    TextView profileAvatarLetter, userName, userEmail, userBio, backBtn;
+    TextView profileAvatarLetter, userName, userEmail, userBio;
+    View backBtn;
     TextView contactsCount, storiesCount, groupsCount;
     FrameLayout changePhotoBtn;
     FirebaseAuth mAuth;
@@ -32,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        PremiumUi.apply(this);
 
         mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();

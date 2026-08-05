@@ -1,73 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#1A1F36</color>
+    <!-- Dark mode: deep navy and vivid electric blue -->
+    <color name="ic_launcher_background">#020817</color>
+    <color name="primary">#1687FF</color>
+    <color name="primary_dark">#0757CE</color>
+    <color name="primary_light">#6BB7FF</color>
+    <color name="primary_surface">#B30A3B78</color>
+    <color name="accent">#218DFF</color>
+    <color name="accent_dark">#0757CE</color>
+    <color name="accent_light">#78BDFF</color>
 
-    <!-- Primárias -->
-    <color name="primary">#7B7FFF</color>
-    <color name="primary_dark">#5B5FEF</color>
-    <color name="primary_light">#A5A8FF</color>
-    <color name="primary_surface">#1E2140</color>
+    <color name="bg_dark">#020817</color>
+    <color name="bg_app">#030A18</color>
+    <color name="bg_surface">#E40A1B36</color>
+    <color name="bg_toolbar">#F2020919</color>
+    <color name="bg_chat">#020817</color>
+    <color name="bg_input">#E10A2145</color>
+    <color name="bg_card">#E20A1B38</color>
 
-    <!-- Aliases para compatibilidade -->
-    <color name="accent">#7B7FFF</color>
-    <color name="accent_dark">#5B5FEF</color>
-    <color name="accent_light">#A5A8FF</color>
-    <color name="bg_dark">#0F1117</color>
-
-    <!-- Backgrounds -->
-    <color name="bg_app">#0F1117</color>
-    <color name="bg_surface">#1A1F36</color>
-    <color name="bg_toolbar">#0F1117</color>
-    <color name="bg_chat">#0D1018</color>
-    <color name="bg_input">#252A45</color>
-    <color name="bg_card">#1A1F36</color>
-
-    <!-- Textos -->
-    <color name="text_primary">#F9FAFB</color>
-    <color name="text_secondary">#9CA3AF</color>
-    <color name="text_hint">#6B7280</color>
+    <color name="text_primary">#F4F9FF</color>
+    <color name="text_secondary">#B7CAE2</color>
+    <color name="text_hint">#7994B6</color>
     <color name="text_white">#FFFFFF</color>
 
-    <!-- Bolhas -->
-    <color name="bubble_sent">#5B5FEF</color>
+    <color name="bubble_sent">#0876EC</color>
     <color name="bubble_sent_text">#FFFFFF</color>
-    <color name="bubble_received">#252A45</color>
-    <color name="bubble_received_text">#F9FAFB</color>
+    <color name="bubble_received">#E2112849</color>
+    <color name="bubble_received_text">#F4F9FF</color>
 
-    <!-- Status -->
-    <color name="online">#22C55E</color>
-    <color name="offline">#6B7280</color>
-    <color name="unread_badge">#EF4444</color>
+    <color name="online">#22D69A</color>
+    <color name="offline">#7994B6</color>
+    <color name="unread_badge">#2A98FF</color>
+    <color name="accent_green">#22D69A</color>
+    <color name="accent_red">#FF5A75</color>
+    <color name="accent_orange">#FFA45B</color>
+    <color name="accent_purple">#9A86FF</color>
+    <color name="accent_teal">#38C8D1</color>
+    <color name="accent_blue">#4CA4FF</color>
 
-    <!-- Ações -->
-    <color name="accent_green">#22C55E</color>
-    <color name="accent_red">#EF4444</color>
-    <color name="accent_orange">#F97316</color>
-    <color name="accent_purple">#A855F7</color>
-    <color name="accent_teal">#14B8A6</color>
-    <color name="accent_blue">#3B82F6</color>
+    <color name="divider">#365680A9</color>
+    <color name="divider_dark">#264A6F9A</color>
+    <color name="icon_bg_blue">#4A0C4A8D</color>
+    <color name="icon_bg_green">#3D0C6A50</color>
+    <color name="icon_bg_orange">#4A7A431A</color>
+    <color name="icon_bg_purple">#4A433188</color>
+    <color name="icon_bg_red">#4A8A2740</color>
+    <color name="icon_bg_teal">#3D0D6C73</color>
 
-    <!-- Divisor -->
-    <color name="divider">#252A45</color>
-    <color name="divider_dark">#1E2140</color>
+    <color name="overlay">#C7020817</color>
+    <color name="shadow">#99000000</color>
+    <color name="dark_bg">#020817</color>
+    <color name="dark_surface">#07162D</color>
+    <color name="dark_card">#0B2142</color>
+    <color name="toolbar_dark">#020817</color>
+    <color name="online_green">#22D69A</color>
+    <color name="red">#FF5A75</color>
+    <color name="white">#FFFFFF</color>
+    <color name="settings_icon_bg">#4A0C4A8D</color>
+    <color name="settings_icon_green">#3D0C6A50</color>
+    <color name="settings_icon_orange">#4A7A431A</color>
+    <color name="settings_icon_purple">#4A433188</color>
+    <color name="settings_icon_red">#4A8A2740</color>
+    <color name="settings_icon_teal">#3D0D6C73</color>
 
-    <!-- Ícones -->
-    <color name="icon_bg_blue">#1E2F4D</color>
-    <color name="icon_bg_green">#1A2E25</color>
-    <color name="icon_bg_orange">#2E2010</color>
-    <color name="icon_bg_purple">#251A35</color>
-    <color name="icon_bg_red">#2E1A1A</color>
-    <color name="icon_bg_teal">#1A2E2D</color>
-
-    <!-- Sombras -->
-    <color name="overlay">#99000000</color>
-    <color name="shadow">#33000000</color>
-
-    <!-- Modo escuro -->
-    <color name="dark_bg">#0F1117</color>
-    <color name="dark_surface">#1A1F36</color>
-    <color name="dark_card">#252A45</color>
-
-    <!-- Toolbar -->
-    <color name="toolbar_dark">#0F1117</color>
+    <color name="icon_primary">#D9ECFF</color>
+    <color name="icon_secondary">#8FAED1</color>
+    <color name="icon_toolbar">#E9F4FF</color>
+    <color name="icon_on_accent">#FFFFFF</color>
+    <color name="surface_gradient_start">#F20D2448</color>
+    <color name="surface_gradient_center">#E6081934</color>
+    <color name="surface_gradient_end">#E312315C</color>
+    <color name="toolbar_gradient_start">#FC020817</color>
+    <color name="toolbar_gradient_center">#F2071D3C</color>
+    <color name="toolbar_gradient_end">#F40A3570</color>
+    <color name="control_stroke">#4E6DA5DA</color>
+    <color name="control_stroke_strong">#8A4EA8FF</color>
+    <color name="list_gradient_start">#E20B2447</color>
+    <color name="list_gradient_end">#D8071731</color>
+    <color name="list_pressed_start">#EF124A8F</color>
+    <color name="list_pressed_end">#E90A3268</color>
+    <color name="input_gradient_start">#E40C2850</color>
+    <color name="input_gradient_end">#D9071A36</color>
+    <color name="input_focus_start">#F0103B73</color>
+    <color name="input_focus_end">#E50A2852</color>
+    <color name="button_gradient_start">#4CA4FF</color>
+    <color name="button_gradient_center">#1687FF</color>
+    <color name="button_gradient_end">#0757CE</color>
+    <color name="button_pressed_start">#0870E2</color>
+    <color name="button_pressed_end">#053D9B</color>
+    <color name="avatar_gradient_start">#8CC5FF</color>
+    <color name="avatar_gradient_center">#2E91FF</color>
+    <color name="avatar_gradient_end">#0757CE</color>
+    <color name="bubble_sent_start">#2D94FF</color>
+    <color name="bubble_sent_end">#0759D2</color>
+    <color name="bubble_received_start">#EC102E57</color>
+    <color name="bubble_received_end">#E2071B38</color>
+    <color name="sheet_gradient_start">#FC0D2D57</color>
+    <color name="sheet_gradient_end">#FC020817</color>
 </resources>

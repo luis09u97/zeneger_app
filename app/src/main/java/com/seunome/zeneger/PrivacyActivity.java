@@ -1,6 +1,5 @@
 package com.seunome.zeneger;
 
-import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +21,7 @@ public class PrivacyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privacy);
+        PremiumUi.apply(this);
 
         mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -64,14 +64,13 @@ public class PrivacyActivity extends AppCompatActivity {
         for (int i = 0; i < options.length; i++) {
             if (options[i].equals(current)) { selected = i; break; }
         }
-        new AlertDialog.Builder(this)
-                .setTitle("Última visualização")
-                .setSingleChoiceItems(options, selected, (d, which) -> {
-                    prefs.edit().putString("last_seen_privacy", options[which]).apply();
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_visibility)
+                .title("Última visualização")
+                .singleChoice(options, selected, (index, label) -> {
+                    prefs.edit().putString("last_seen_privacy", label).apply();
                     updatePrivacyValues();
-                    d.dismiss();
                 })
-                .setNegativeButton("Cancelar", null)
                 .show();
     }
 
@@ -82,14 +81,13 @@ public class PrivacyActivity extends AppCompatActivity {
         for (int i = 0; i < options.length; i++) {
             if (options[i].equals(current)) { selected = i; break; }
         }
-        new AlertDialog.Builder(this)
-                .setTitle("Foto de perfil")
-                .setSingleChoiceItems(options, selected, (d, which) -> {
-                    prefs.edit().putString("profile_photo_privacy", options[which]).apply();
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_person)
+                .title("Foto de perfil")
+                .singleChoice(options, selected, (index, label) -> {
+                    prefs.edit().putString("profile_photo_privacy", label).apply();
                     updatePrivacyValues();
-                    d.dismiss();
                 })
-                .setNegativeButton("Cancelar", null)
                 .show();
     }
 
@@ -155,6 +153,11 @@ public class PrivacyActivity extends AppCompatActivity {
                     android.view.ViewGroup parent, int viewType) {
                 android.view.View v = android.view.LayoutInflater.from(parent.getContext())
                         .inflate(android.R.layout.simple_list_item_2, parent, false);
+                v.setBackgroundResource(R.drawable.bg_list_item_glass);
+                float density = parent.getResources().getDisplayMetrics().density;
+                v.setPadding(Math.round(16 * density), Math.round(8 * density),
+                        Math.round(16 * density), Math.round(8 * density));
+                PremiumUi.styleDynamic(v);
                 return new RecyclerView.ViewHolder(v) {};
             }
 
@@ -178,15 +181,18 @@ public class PrivacyActivity extends AppCompatActivity {
     }
 
     private void showUnblockDialog(String uid, String name, String myUid) {
-        new AlertDialog.Builder(this)
-                .setTitle("Desbloquear " + name + "?")
-                .setMessage(name + " poderá enviar mensagens para você novamente.")
-                .setPositiveButton("Desbloquear", (d, w) ->
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_block)
+                .title("Desbloquear " + name + "?")
+                .message(name + " poderá enviar mensagens para você novamente.")
+                .confirm("Desbloquear", d ->
                         mDatabase.child("blocked").child(myUid).child(uid).removeValue()
-                                .addOnSuccessListener(unused ->
-                                        Toast.makeText(this, name + " desbloqueado! ✅",
-                                                Toast.LENGTH_SHORT).show()))
-                .setNegativeButton("Cancelar", null)
+                                .addOnSuccessListener(unused -> {
+                                    Toast.makeText(this, name + " desbloqueado! ✅",
+                                            Toast.LENGTH_SHORT).show();
+                                    d.dismiss();
+                                }))
+                .cancel("Cancelar")
                 .show();
     }
 

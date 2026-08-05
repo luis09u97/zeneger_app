@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="responsive_edge_padding">0dp</dimen>
+    <dimen name="auth_horizontal_padding">28dp</dimen>
+    <dimen name="brand_mark_size">96dp</dimen>
+    <dimen name="settings_profile_avatar_size">84dp</dimen>
+    <dimen name="toolbar_height">78dp</dimen>
+    <dimen name="action_touch_size">56dp</dimen>
+    <dimen name="compact_touch_size">52dp</dimen>
+    <dimen name="inline_action_size">44dp</dimen>
+    <dimen name="action_icon_size">26dp</dimen>
+    <dimen name="field_height">60dp</dimen>
+    <dimen name="primary_button_height">60dp</dimen>
+    <dimen name="chip_height">44dp</dimen>
+    <dimen name="list_item_height">98dp</dimen>
+    <dimen name="list_avatar_size">64dp</dimen>
+    <dimen name="story_item_height">104dp</dimen>
+    <dimen name="story_avatar_size">72dp</dimen>
+    <dimen name="story_avatar_inner_size">64dp</dimen>
+    <dimen name="settings_item_height">78dp</dimen>
+    <dimen name="settings_icon_box">48dp</dimen>
+    <dimen name="settings_icon_size">24dp</dimen>
+    <dimen name="fab_size">70dp</dimen>
+    <dimen name="composer_height">62dp</dimen>
+    <dimen name="profile_avatar_size">138dp</dimen>
+    <dimen name="profile_header_height">292dp</dimen>
+    <dimen name="view_profile_header_height">310dp</dimen>
+    <dimen name="premium_card_elevation">9dp</dimen>
+    <dimen name="message_max_width">300dp</dimen>
+</resources>

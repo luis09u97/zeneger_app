@@ -18,6 +18,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
+        PremiumUi.apply(this);
 
         String userId = getIntent().getStringExtra("userId");
 

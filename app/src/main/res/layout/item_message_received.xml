@@ -18,14 +18,14 @@
         android:paddingEnd="12dp"
         android:paddingTop="8dp"
         android:paddingBottom="6dp"
-        android:elevation="2dp">
+        android:elevation="7dp">
 
         <TextView
             android:id="@+id/senderName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/primary"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textStyle="bold"
             android:visibility="gone"/>
 
@@ -34,16 +34,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/bubble_received_text"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:lineSpacingExtra="2dp"
-            android:maxWidth="260dp"/>
+            android:maxWidth="@dimen/message_max_width"/>
 
         <TextView
             android:id="@+id/timeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_hint"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:layout_gravity="end"
             android:layout_marginTop="3dp"/>
 
@@ -53,7 +53,7 @@
         android:id="@+id/reactionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="17sp"
         android:layout_gravity="start"
         android:layout_marginTop="2dp"
         android:visibility="gone"/>

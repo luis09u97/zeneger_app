@@ -1,14 +1,15 @@
 package com.seunome.zeneger;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.*;
 import com.google.firebase.database.*;
@@ -24,6 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        PremiumUi.apply(this);
 
         mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -90,10 +92,23 @@ public class SettingsActivity extends AppCompatActivity {
             logoutOption.setOnClickListener(v -> showLogoutDialog());
 
         // Switches
-        Switch notifSwitch       = findViewById(R.id.notificationsSwitch);
-        Switch groupNotifSwitch  = findViewById(R.id.groupNotifSwitch);
-        Switch soundSwitch       = findViewById(R.id.soundSwitch);
-        Switch readReceiptSwitch = findViewById(R.id.readReceiptSwitch);
+        CompoundButton notifSwitch       = findViewById(R.id.notificationsSwitch);
+        CompoundButton groupNotifSwitch  = findViewById(R.id.groupNotifSwitch);
+        CompoundButton soundSwitch       = findViewById(R.id.soundSwitch);
+        CompoundButton readReceiptSwitch = findViewById(R.id.readReceiptSwitch);
+        CompoundButton themeModeSwitch   = findViewById(R.id.themeModeSwitch);
+
+        if (themeModeSwitch != null) {
+            boolean darkMode = (getResources().getConfiguration().uiMode
+                    & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+            themeModeSwitch.setChecked(darkMode);
+            themeModeSwitch.setOnCheckedChangeListener((btn, checked) -> {
+                prefs.edit().putBoolean("dark_mode_override", checked).apply();
+                AppCompatDelegate.setDefaultNightMode(checked
+                        ? AppCompatDelegate.MODE_NIGHT_YES
+                        : AppCompatDelegate.MODE_NIGHT_NO);
+            });
+        }
 
         if (notifSwitch != null) {
             notifSwitch.setChecked(prefs.getBoolean("notifications_enabled", true));
@@ -218,27 +233,25 @@ public class SettingsActivity extends AppCompatActivity {
         if (mAuth.getCurrentUser() == null) return;
         String myUid = mAuth.getCurrentUser().getUid();
 
-        EditText input = new EditText(this);
-        input.setHint("Novo nome");
-        input.setPadding(50, 30, 50, 30);
-
-        new AlertDialog.Builder(this)
-                .setTitle("Alterar nome")
-                .setMessage("Digite seu novo nome de exibição")
-                .setView(input)
-                .setPositiveButton("Salvar", (d, w) -> {
-                    String newName = input.getText().toString().trim();
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_edit)
+                .title("Alterar nome")
+                .message("Digite seu novo nome de exibição")
+                .input("Novo nome")
+                .confirmInput("Salvar", (d, newName) -> {
                     if (newName.isEmpty()) {
                         Toast.makeText(this, "Nome não pode ser vazio", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     mDatabase.child("users").child(myUid).child("name").setValue(newName)
-                            .addOnSuccessListener(unused ->
-                                    Toast.makeText(this, "Nome atualizado! ✅", Toast.LENGTH_SHORT).show())
+                            .addOnSuccessListener(unused -> {
+                                Toast.makeText(this, "Nome atualizado! ✅", Toast.LENGTH_SHORT).show();
+                                d.dismiss();
+                            })
                             .addOnFailureListener(e ->
                                     Toast.makeText(this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show());
                 })
-                .setNegativeButton("Cancelar", null)
+                .cancel("Cancelar")
                 .show();
     }
 
@@ -246,33 +259,29 @@ public class SettingsActivity extends AppCompatActivity {
         if (mAuth.getCurrentUser() == null) return;
         String myUid = mAuth.getCurrentUser().getUid();
 
-        EditText input = new EditText(this);
-        input.setHint("Sobre você...");
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-        input.setMinLines(3);
-        input.setMaxLines(5);
-        input.setPadding(50, 30, 50, 30);
-
         mDatabase.child("users").child(myUid).child("bio")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snap) {
                         String bio = snap.getValue(String.class);
-                        if (bio != null) input.setText(bio);
-
-                        new AlertDialog.Builder(SettingsActivity.this)
-                                .setTitle("Alterar bio")
-                                .setMessage("Escreva algo sobre você")
-                                .setView(input)
-                                .setPositiveButton("Salvar", (d, w) -> {
-                                    String newBio = input.getText().toString().trim();
+                        ZenegerDialog.Builder builder = ZenegerDialog.on(SettingsActivity.this)
+                                .icon(R.drawable.ic_zen_edit)
+                                .title("Alterar bio")
+                                .message("Escreva algo sobre você")
+                                .input("Sobre você...", InputType.TYPE_CLASS_TEXT
+                                        | InputType.TYPE_TEXT_FLAG_MULTI_LINE)
+                                .inputLines(3, 5)
+                                .confirmInput("Salvar", (d, newBio) -> {
                                     mDatabase.child("users").child(myUid).child("bio").setValue(newBio)
-                                            .addOnSuccessListener(unused ->
-                                                    Toast.makeText(SettingsActivity.this,
-                                                            "Bio atualizada! ✅", Toast.LENGTH_SHORT).show());
+                                            .addOnSuccessListener(unused -> {
+                                                Toast.makeText(SettingsActivity.this,
+                                                        "Bio atualizada! ✅", Toast.LENGTH_SHORT).show();
+                                                d.dismiss();
+                                            });
                                 })
-                                .setNegativeButton("Cancelar", null)
-                                .show();
+                                .cancel("Cancelar");
+                        if (bio != null) builder.prefill(bio);
+                        builder.show();
                     }
                     @Override public void onCancelled(DatabaseError error) {}
                 });
@@ -282,31 +291,16 @@ public class SettingsActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) return;
 
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setPadding(60, 20, 60, 20);
-
-        EditText emailInput = new EditText(this);
-        emailInput.setHint("Novo email");
-        emailInput.setInputType(InputType.TYPE_CLASS_TEXT |
-                InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-        emailInput.setPadding(0, 20, 0, 10);
-
-        EditText passwordInput = new EditText(this);
-        passwordInput.setHint("Senha atual (para confirmar)");
-        passwordInput.setInputType(InputType.TYPE_CLASS_TEXT |
-                InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        passwordInput.setPadding(0, 10, 0, 10);
-
-        layout.addView(emailInput);
-        layout.addView(passwordInput);
-
-        new AlertDialog.Builder(this)
-                .setTitle("Alterar email")
-                .setView(layout)
-                .setPositiveButton("Salvar", (d, w) -> {
-                    String newEmail = emailInput.getText().toString().trim();
-                    String password = passwordInput.getText().toString().trim();
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_email)
+                .title("Alterar email")
+                .field("Novo email", InputType.TYPE_CLASS_TEXT
+                        | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+                .field("Senha atual (para confirmar)", InputType.TYPE_CLASS_TEXT
+                        | InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                .confirmFields("Salvar", (d, fields) -> {
+                    String newEmail = fields.get(0).getText().toString().trim();
+                    String password = fields.get(1).getText().toString().trim();
 
                     if (newEmail.isEmpty() || password.isEmpty()) {
                         Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
@@ -324,6 +318,7 @@ public class SettingsActivity extends AppCompatActivity {
                                                         .child("email").setValue(newEmail);
                                                 Toast.makeText(this, "Email atualizado! ✅",
                                                         Toast.LENGTH_SHORT).show();
+                                                d.dismiss();
                                             })
                                             .addOnFailureListener(e ->
                                                     Toast.makeText(this, "Erro: " + e.getMessage(),
@@ -332,7 +327,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     Toast.makeText(this, "Senha incorreta",
                                             Toast.LENGTH_SHORT).show());
                 })
-                .setNegativeButton("Cancelar", null)
+                .cancel("Cancelar")
                 .show();
     }
 
@@ -340,31 +335,16 @@ public class SettingsActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) return;
 
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setPadding(60, 20, 60, 20);
-
-        EditText currentPassInput = new EditText(this);
-        currentPassInput.setHint("Senha atual");
-        currentPassInput.setInputType(InputType.TYPE_CLASS_TEXT |
-                InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        currentPassInput.setPadding(0, 20, 0, 10);
-
-        EditText newPassInput = new EditText(this);
-        newPassInput.setHint("Nova senha (mínimo 6 caracteres)");
-        newPassInput.setInputType(InputType.TYPE_CLASS_TEXT |
-                InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        newPassInput.setPadding(0, 10, 0, 10);
-
-        layout.addView(currentPassInput);
-        layout.addView(newPassInput);
-
-        new AlertDialog.Builder(this)
-                .setTitle("Alterar senha")
-                .setView(layout)
-                .setPositiveButton("Salvar", (d, w) -> {
-                    String currentPass = currentPassInput.getText().toString().trim();
-                    String newPass     = newPassInput.getText().toString().trim();
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_lock)
+                .title("Alterar senha")
+                .field("Senha atual", InputType.TYPE_CLASS_TEXT
+                        | InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                .field("Nova senha (mínimo 6 caracteres)", InputType.TYPE_CLASS_TEXT
+                        | InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                .confirmFields("Salvar", (d, fields) -> {
+                    String currentPass = fields.get(0).getText().toString().trim();
+                    String newPass     = fields.get(1).getText().toString().trim();
 
                     if (currentPass.isEmpty() || newPass.isEmpty()) {
                         Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
@@ -381,9 +361,11 @@ public class SettingsActivity extends AppCompatActivity {
                     user.reauthenticate(credential)
                             .addOnSuccessListener(unused ->
                                     user.updatePassword(newPass)
-                                            .addOnSuccessListener(unused2 ->
-                                                    Toast.makeText(this, "Senha atualizada! ✅",
-                                                            Toast.LENGTH_SHORT).show())
+                                            .addOnSuccessListener(unused2 -> {
+                                                Toast.makeText(this, "Senha atualizada! ✅",
+                                                        Toast.LENGTH_SHORT).show();
+                                                d.dismiss();
+                                            })
                                             .addOnFailureListener(e ->
                                                     Toast.makeText(this, "Erro: " + e.getMessage(),
                                                             Toast.LENGTH_LONG).show()))
@@ -391,7 +373,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     Toast.makeText(this, "Senha atual incorreta",
                                             Toast.LENGTH_SHORT).show());
                 })
-                .setNegativeButton("Cancelar", null)
+                .cancel("Cancelar")
                 .show();
     }
 
@@ -403,28 +385,27 @@ public class SettingsActivity extends AppCompatActivity {
             if (options[i].equals(current)) { selected = i; break; }
         }
 
-        new AlertDialog.Builder(this)
-                .setTitle("Quem pode ver sua última visualização?")
-                .setSingleChoiceItems(options, selected, (d, which) -> {
-                    prefs.edit().putString("last_seen_privacy", options[which]).apply();
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_visibility)
+                .title("Quem pode ver sua última visualização?")
+                .singleChoice(options, selected, (index, label) -> {
+                    prefs.edit().putString("last_seen_privacy", label).apply();
                     TextView lastSeenValue = findViewById(R.id.lastSeenValue);
-                    if (lastSeenValue != null) lastSeenValue.setText(options[which]);
-                    d.dismiss();
+                    if (lastSeenValue != null) lastSeenValue.setText(label);
                 })
-                .setNegativeButton("Cancelar", null)
                 .show();
     }
 
     private void showWallpaperDialog() {
         String[] options = {"Padrão", "Claro", "Azul suave", "Cinza"};
-        new AlertDialog.Builder(this)
-                .setTitle("Papel de parede")
-                .setItems(options, (d, which) -> {
-                    prefs.edit().putInt("wallpaper_choice", which).apply();
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_theme)
+                .title("Papel de parede")
+                .items(options, (index, label) -> {
+                    prefs.edit().putInt("wallpaper_choice", index).apply();
                     Toast.makeText(this, "Papel de parede alterado! ✅",
                             Toast.LENGTH_SHORT).show();
                 })
-                .setNegativeButton("Cancelar", null)
                 .show();
     }
 
@@ -443,19 +424,21 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void showClearCacheDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("Limpar cache")
-                .setMessage("Isso removerá arquivos temporários. Deseja continuar?")
-                .setPositiveButton("Limpar", (d, w) -> {
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_storage)
+                .title("Limpar cache")
+                .message("Isso removerá arquivos temporários. Deseja continuar?")
+                .confirm("Limpar", d -> {
                     try {
                         deleteDir(getCacheDir());
                         Toast.makeText(this, "Cache limpo! 🧹", Toast.LENGTH_SHORT).show();
                         calculateStorage();
+                        d.dismiss();
                     } catch (Exception e) {
                         Toast.makeText(this, "Erro ao limpar cache", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton("Cancelar", null)
+                .cancel("Cancelar")
                 .show();
     }
 
@@ -470,10 +453,11 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void showLogoutDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("Sair da conta")
-                .setMessage("Tem certeza que deseja encerrar sua sessão no Zeneger?")
-                .setPositiveButton("Sair", (d, w) -> {
+        ZenegerDialog.on(this)
+                .icon(R.drawable.ic_zen_logout)
+                .title("Sair da conta")
+                .message("Tem certeza que deseja encerrar sua sessão no Zeneger?")
+                .confirm("Sair", d -> {
                     try {
                         if (mAuth.getCurrentUser() != null) {
                             String uid = mAuth.getCurrentUser().getUid();
@@ -489,7 +473,7 @@ public class SettingsActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 })
-                .setNegativeButton("Cancelar", null)
+                .cancel("Cancelar")
                 .show();
     }
 
